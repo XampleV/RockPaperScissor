@@ -74,8 +74,10 @@ namespace RockPaperScissorText
             Console.WriteLine($"Your current score is {yourScore}.");
 
             // TODO: Ask the Hooman to enter 'R' for Rock, 'P' for Paper, or 'S' for Scissors.
+            Console.WriteLine("Enter R for rock, P for paper, S for scissors: ");
+            string userChoice = Console.ReadLine();
             // TODO: Assign the user input of R, P, S to the variable playerRPSChoice. HINT... use .ToLower() so that capitalization does not matter from the user.
-
+            playerRPSChoice = userChoice.ToLower();
 
 
             //Control Logic the displays the Computers RPS choice. Based on computer's "choice": assigns Rock, Paper or Scissor to rpsComputerPlays.
@@ -99,13 +101,34 @@ namespace RockPaperScissorText
             }
 
             // TODO: Add a Switch Statement based on playerRPSChoice. It should output to the screen what they chose (for example: Console.WriteLine($"You chose Rock");. AND assign a value to playerRPSNumValue. The playerRPSNumValue should be the same as the computerRPSRandomNum. So r = 3, p = 2 and s = 1.
-
+            switch (playerRPSChoice)
+            {
+                case "r":
+                    Console.WriteLine("You chose rock.");
+                    playerRPSNumValue = 3;
+                    break;
+                case "p":
+                    Console.WriteLine("You chose paper.");
+                    playerRPSNumValue = 2;
+                    break;
+                case "s":
+                    Console.WriteLine("You chose scissor.");
+                    playerRPSNumValue = 1;
+                    break;
+            }
             WinnerLoserLogic();
 
             Console.WriteLine("Would you like to play again? 'Y' for Yes, 'N' for No.");
             string playAgain = Console.ReadLine().ToLower();
             // TODO: Add a Switch Statement to ask the player if they want to play again. If yes, call the method "RPSChoices();" if no, exit the program.
-
+            switch (Convert.ToChar(playAgain))
+            {
+                case 'y':
+                    RPSChoices();
+                    break;
+                case 'n':
+                    break;
+            }
         }
 
         public static void WinnerLoserLogic()
@@ -114,6 +137,54 @@ namespace RockPaperScissorText
             Console.WriteLine($"PC Chose {rpsComputerPlays}.");
 
             // TODO: Add logic to determine the winner between the player and computer. You may use either an Else If Statement or Switch Statement to do it. 
+            if (playerRPSChoice == "r" && rpsComputerPlays == "Scissors") // rock
+            {
+                Console.WriteLine("You won.");
+                ++yourScore;
+            }
+            else if (playerRPSChoice == "r" && rpsComputerPlays == "Rock")
+            {
+                Console.WriteLine("It's a tie.");
+            }else if (playerRPSChoice == "r" && rpsComputerPlays == "Paper")
+            {
+                Console.WriteLine("You lost.");
+                --yourScore;
+
+            }
+
+            if (playerRPSChoice == "p" && rpsComputerPlays == "Scissors") // rock
+            {
+                Console.WriteLine("You lost.");
+                --yourScore;
+            }
+            else if (playerRPSChoice == "p" && rpsComputerPlays == "Rock")
+            {
+                Console.WriteLine("you won.");
+                ++yourScore;
+            }
+            else if (playerRPSChoice == "p" && rpsComputerPlays == "Paper")
+            {
+                Console.WriteLine("It's a tie.");
+
+            }
+
+            if (playerRPSChoice == "s" && rpsComputerPlays == "Scissors") // rock
+            {
+                Console.WriteLine("It's a tie.");
+
+            }
+            else if (playerRPSChoice == "s" && rpsComputerPlays == "Rock")
+            {
+                Console.WriteLine("You lost.");
+                --yourScore;
+            }
+            else if (playerRPSChoice == "s" && rpsComputerPlays == "Paper")
+            {
+                Console.WriteLine("you won.");
+                ++yourScore;
+
+            }
+
             // TODO: based on whether the player wins or loses, increment or decrement the variable "yourScore". This will be ++yourScore if they win or --yourScore if they lose. If it is a tie, there should be no change. 
 
 
